@@ -35,11 +35,13 @@ func main() {
 
 	//启动应用服务
 	group.Go(func() error {
+		defer fmt.Println("Close some resources when App shutdown")
 		return serverApp.ListenAndServe()
 	})
 
 	//启动监控服务
 	group.Go(func() error {
+		defer fmt.Println("Close some resources when Debug shutdown")
 		return serverDebug.ListenAndServe()
 	})
 
